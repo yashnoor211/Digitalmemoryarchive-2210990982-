@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        Digital Memory Decay Analytics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        Digital Memory Decay Analytics
+    </h1>
+
+    <div class="form-box">
+
+        <form method="POST">
+
+            <label>Select Dataset</label>
+
+            <select name="dataset">
+
+                {% for dataset in datasets %}
+
+                <option>
+                    {{ dataset }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <label>Archive ID</label>
+
+            <input
+                type="text"
+                name="archive_id"
+                placeholder="Enter Archive ID"
+                required
+            >
+
+            <button type="submit">
+                Run Analysis
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if result %}
+
+    <div class="result-box">
+
+        <h2>Analysis Result</h2>
+
+        <p>
+            <strong>Archive ID:</strong>
+            {{ result.archive_id }}
+        </p>
+
+        <p>
+            <strong>File Type:</strong>
+            {{ result.file_type }}
+        </p>
+
+        <p>
+            <strong>Preservation Score:</strong>
+            {{ result.score }}%
+        </p>
+
+        <p>
+            <strong>Risk Analysis:</strong>
+            {{ result.analysis }}
+        </p>
+
+        <img
+            src="{{ result.graph }}"
+        >
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
